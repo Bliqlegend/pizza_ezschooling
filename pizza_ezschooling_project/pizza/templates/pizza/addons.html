@@ -1,0 +1,43 @@
+{% extends 'pizza/base.html' %}
+{% block 'body' %}
+{% load widget_tweaks %}
+
+  {% load static %}
+
+  <head>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="{% static 'tan-light.css' %}">
+  </head>
+
+    <div class="qfc-container">
+      <!-- <h1>Order a Pizza</h1> -->
+      
+
+
+      <form action="{% url 'addons' %}" method="post">
+          {% csrf_token %}
+          {% for field in userform %}
+        <div class="form-group {%if field.errors %}alert alert-danger{%endif%}">
+
+
+            {{ field.errors }}
+            {{ field.label_tag }}
+            {% render_field field class="form-control" %}
+
+
+        </div>
+        {% endfor %}
+
+          <input type="submit" value="Add">
+      </form>
+
+      <br><br>
+      <!-- Want more than one pizza? -->
+      <!-- <form action="{% url 'pizzas' %}" method="get">
+        {% csrf_token %}
+        {{ multiple_form }}
+        <input type="submit" value="Get Pizzas">
+      </form> -->
+
+    </div>
+{% endblock %}
